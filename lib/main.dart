@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
-import 'package:xlo_mobx/screens/base/base_screen.dart';
+import 'package:xlo_mobx/screens/home/home_screen.dart';
+import 'package:xlo_mobx/screens/login/login_screen.dart';
+import 'package:xlo_mobx/screens/signup/signup_screen.dart';
 import 'package:xlo_mobx/shared/store/page_store.dart';
 
 Future<void> initParse() async {
@@ -22,6 +24,7 @@ void setupLocators() {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initParse();
+  setupLocators();
 
   runApp(const MyApp());
 }
@@ -33,10 +36,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'XLO',
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/home',
+      routes: {
+        '/home': (context) => const HomeScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+      },
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        scaffoldBackgroundColor: Colors.purple,
       ),
-      home: const BaseScreen(),
     );
   }
 }
